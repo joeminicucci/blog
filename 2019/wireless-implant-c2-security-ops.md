@@ -216,7 +216,7 @@ For example, a bot by default will run in communication mode for 20 seconds to g
 
 ![](../.gitbook/assets/bot_cycle.png)
 
-If a bot discovers a target, [discussed further in the alerting section](wireless-security-operations-using-implants.md#alerting-and-response), it would enter alert mode for another preset Task interval, followed by going back to re-synchronize with the mesh. Re-synchronization is performed ad-hoc every 900 seconds by default, as it was found over time SNTP wasn't always reliable and nodes could become orphaned with increasing distance, signal attenuation & interference. 
+If a bot discovers a target, [discussed further in the alerting section](wireless-implant-c2-security-ops.md#alerting-and-response), it would enter alert mode for another preset Task interval, followed by going back to re-synchronize with the mesh. Re-synchronization is performed ad-hoc every 900 seconds by default, as it was found over time SNTP wasn't always reliable and nodes could become orphaned with increasing distance, signal attenuation & interference. 
 
 ![](../.gitbook/assets/resync.png)
 
@@ -345,7 +345,7 @@ The video below demonstrates two bots, being monitored over serial synchronizing
 
 ### Bot Implementation - Alert Mode
 
-The alert mode is fairly straightforward, as it disables all other tasks and prioritizes send the alert a set number of times over a set period of time. It will either give up or receive an acknowledgement from the root node in order to resynchronize to the mesh and continue sniffing. This is [discussed in the next sections pertaining to C2 functionality](wireless-security-operations-using-implants.md#root-implementation-c2-functionality) and the [alerting model](wireless-security-operations-using-implants.md#alerting-and-response-pseduo-syn-ack-model).
+The alert mode is fairly straightforward, as it disables all other tasks and prioritizes send the alert a set number of times over a set period of time. It will either give up or receive an acknowledgement from the root node in order to resynchronize to the mesh and continue sniffing. This is [discussed in the next sections pertaining to C2 functionality](wireless-implant-c2-security-ops.md#root-implementation-c2-functionality) and the [alerting model](wireless-implant-c2-security-ops.md#alerting-and-response-pseduo-syn-ack-model).
 
 ```cpp
 void initializeAlertMode()

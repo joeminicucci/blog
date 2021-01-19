@@ -1,5 +1,7 @@
 # About
 
+## [https://blog.joeminicucci.com](https://blog.joeminicucci.com)
+
 ## Bio
 
 I am a Penetration Tester with a background in Software Engineering and Computer Science. This blog is intended to discuss: 

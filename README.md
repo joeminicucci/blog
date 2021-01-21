@@ -1,20 +1,19 @@
 # About
 
-## [https://blog.joeminicucci.com](https://blog.joeminicucci.com)
-
 ## Bio
 
-I am a Penetration Tester with a background in Software Engineering and Computer Science. This blog is intended to discuss: 
+I am an Offensive Security Engineer specializing in Red Teaming and Penetration Testing. My is background in Software Engineering and Computer Science. This blog is intended to discuss: 
 
-* Network & Application Security
-* Adversary Emulation
+* Network, Application, Wireless & Physical Security
+* Red Teaming & Adversary Emulation
+* Security Research
 * Software Engineering
 
 ## Contact
 
 ### [Website](https://joeminicucci.com)
 
-### [Github](https://github.com/joeminicucci)
+### [GitHub](https://github.com/joeminicucci)
 
 ### [LinkedIn](https://www.linkedin.com/in/joeminicucci)
 

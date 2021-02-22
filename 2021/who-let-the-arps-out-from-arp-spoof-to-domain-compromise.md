@@ -2,7 +2,7 @@
 description: Compromising AD in an assumed breach scenario using old-school network attacks
 ---
 
-# Who let the ARPs out? - From ARP spoof to domain compromise
+# Who Let the ARPs Out? - From ARP Spoof to Domain Compromise
 
 ## Setting the Stage
 

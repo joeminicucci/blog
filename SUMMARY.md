@@ -2,7 +2,7 @@
 
 * [About](README.md)
 * [2021](2021/README.md)
-  * [Who let the ARPs out? - From ARP spoof to domain compromise](2021/who-let-the-arps-out-from-arp-spoof-to-domain-compromise.md)
+  * [Who Let the ARPs Out? - From ARP Spoof to Domain Compromise](2021/who-let-the-arps-out-from-arp-spoof-to-domain-compromise.md)
 * [2020](2020/README.md)
   * [Basic Exploitation of SSO Access Tokens](2020/basic-exploitation-of-sso-access-tokens.md)
 * [2019](2019/README.md)

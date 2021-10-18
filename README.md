@@ -2,7 +2,7 @@
 
 ## Bio
 
-I am an Offensive Security Engineer specializing in Penetration Testing and Red Teaming. My background is in Software Engineering and Computer Science. This blog is intended to discuss: 
+I am an Offensive Security Engineer specializing in Penetration Testing and Red Teaming. My background is in Software Engineering and Computer Science. This blog is intended to discuss:&#x20;
 
 * Network, Application, Wireless & Physical Security
 * Red Teaming & Adversary Emulation
@@ -23,7 +23,5 @@ I am an Offensive Security Engineer specializing in Penetration Testing and Red 
 
 **Thanks for visiting!**
 
-![](.gitbook/assets/doge.png)
-
-
+![](.gitbook/assets/Doge.png)
 

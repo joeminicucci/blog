@@ -12,7 +12,7 @@ There are many great pre-existing resources among the information security commu
 
 In short, the security industry, technology companies, and enterprises are increasingly utilizing infrastructure-as-code and configuration-as-code approaches to automate the menial tasks of IT provisioning. The days of spinning up new machinery, logging in and configuring software will never end, but the effort which is required becomes exponentially compact as professionals take advantage of "DevOps" software. DevOps provides assurances of repeatability and flexibility across any size infrastructure, freeing up IT teams and System Administrators to work on more important tasks. The true power of DevOps is unleashed when development efforts can be managed, codified, tested and deployed flexibly and automatically, requiring human intervention only when the changes at hand impede the [continuous integration & deployment process](https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment).
 
-In the context of so-called "OffSecOps" \(offensive security operations\), the industry is increasingly favoring malleability and resilience when running offensive information security campaigns. OffSecOps often encompasses multiple facets of the traditional security engagement in addition to more modern, adversarial emulation scenarios. Crafting the infrastructure in such a way that is both quickly tailored to the target, as well as flexible in the face of competing Blue Teams is paramount. 
+In the context of so-called "OffSecOps" (offensive security operations), the industry is increasingly favoring malleability and resilience when running offensive information security campaigns. OffSecOps often encompasses multiple facets of the traditional security engagement in addition to more modern, adversarial emulation scenarios. Crafting the infrastructure in such a way that is both quickly tailored to the target, as well as flexible in the face of competing Blue Teams is paramount.&#x20;
 
 The [Red Team Infrastructure Wiki](https://github.com/bluscreenofjeff/Red-Team-Infrastructure-Wiki) hashes out specifications of building good Red Team Infrastructure in precise detail, and serves as a great reference for any Red Team looking to supercharge their operations. As [harmj0y ](https://twitter.com/harmj0y)outlined in his [phenomenal SO-CON 2020 talk](https://www.youtube.com/watch?v=XaICChBJMck), OffSecOps automation doesn't end at infrastructure & configuration - but can be extended to every limb of the offensive security lifecycle. From payload development, social engineering, C2, all the way to post-exploitation tasks & reporting - OffSecOps really sets the sky as the limit for security ops moving forward. Security teams can no longer ignore the impending wave of the DevOps revolution occurring industry-wide, lest they do so at the peril of their own cost & time.
 
@@ -25,7 +25,7 @@ I set out to begin automating Red Team Infrastructure and software configuration
 * Pre-populated DNS, such as A, NS, DKIM and SPF records
 * Malleable redirectors fronting each application
 
-Simplifying and serializing the state-changing operations into a single ingestion point, as well as leveraging file formats which could be easily consumed by micro-services would allow for the framework to be implemented into an Offensive CI pipeline in the future. Furthermore, I wanted to offer more granular network isolation using AWS than was offered in previously developed tools. Depicted below is the project's phase 1 initial architecture proposal \(fireballs indicate burnable infrastructure\) :
+Simplifying and serializing the state-changing operations into a single ingestion point, as well as leveraging file formats which could be easily consumed by micro-services would allow for the framework to be implemented into an Offensive CI pipeline in the future. Furthermore, I wanted to offer more granular network isolation using AWS than was offered in previously developed tools. Depicted below is the project's phase 1 initial architecture proposal (fireballs indicate burnable infrastructure) :
 
 ![Red Ira Phase 1 Architecture](../.gitbook/assets/operation1.jpg)
 
@@ -42,23 +42,23 @@ Selecting an infrastructure-as-code and configuration-as-code framework is the f
 * Idempotency: Ease-of-development & ability to change production deployments on the spot
 * Pick what works: Strong preference for a tool set which SMEs in the industry already use and have made available, so as to save development time and complexity costs
 
-Ultimately, Terraform and Ansible were selected, with justifications outlined in the following sections. Fundamentally, the choice came between choosing a containerized orchestration route and resource-based management. The containerized approach of using a technology like Kubernetes with Docker is powerful due to its ability to rapidly deploy predictable containers that 'just work', and to drive deployments at scale. While K8s checked the repeatability box, the other 3 considerations strongly favored the Terraform / Ansible stack. 
+Ultimately, Terraform and Ansible were selected, with justifications outlined in the following sections. Fundamentally, the choice came between choosing a containerized orchestration route and resource-based management. The containerized approach of using a technology like Kubernetes with Docker is powerful due to its ability to rapidly deploy predictable containers that 'just work', and to drive deployments at scale. While K8s checked the repeatability box, the other 3 considerations strongly favored the Terraform / Ansible stack.&#x20;
 
 ### Terraform
 
-[Terraform](https://www.terraform.io/)'s strength lies in its ability to quickly construct bare-bones infrastructure on[ any number of managed cloud providers and open source cloud hosting stacks](https://registry.terraform.io/browse/providers), using the straightforward [HCL declarative configuration language](https://github.com/hashicorp/hcl) that Hashicorp came up with. HCL & Terraform are [built on graph theory](https://www.youtube.com/watch?v=Ce3RNfRbdZ0), providing a level of modularity which allows for components to be seamlessly abstracted and built upon, even with a minimal knowledge of the language. Furthermore, it allows for the [core Terrform workflow](https://www.terraform.io/guides/core-workflow.html) to be dead simple, allowing not only for scale across multiple teams and deployments, but for ease of use both in an automated CI environment as well as a manual CLI operation. 
+[Terraform](https://www.terraform.io)'s strength lies in its ability to quickly construct bare-bones infrastructure on[ any number of managed cloud providers and open source cloud hosting stacks](https://registry.terraform.io/browse/providers), using the straightforward [HCL declarative configuration language](https://github.com/hashicorp/hcl) that Hashicorp came up with. HCL & Terraform are [built on graph theory](https://www.youtube.com/watch?v=Ce3RNfRbdZ0), providing a level of modularity which allows for components to be seamlessly abstracted and built upon, even with a minimal knowledge of the language. Furthermore, it allows for the [core Terrform workflow](https://www.terraform.io/guides/core-workflow.html) to be dead simple, allowing not only for scale across multiple teams and deployments, but for ease of use both in an automated CI environment as well as a manual CLI operation.&#x20;
 
-There are several approaches to team-based Terraform deployments, each with its own individual merits. For example, SaaS services such as [scalr](https://scalr.com/) and [Terraform Cloud](https://www.terraform.io/docs/cloud/index.html) exist to manage concurrent Terraform automation modules across teams. With a strong preference to open source and a being a huge fan of [Gitlab,](https://about.gitlab.com/) ChatOps, and [xpn's previous work on Terraform / Ansible based security integration in Gitlab CI](https://blog.xpnsec.com/testing-redteam-infra/), I favored an approach which would allow for 'plug-n-play' deployments. In other words, tuning a Gitlab CI pipeline to serialize simple changes, which would be picked up as a state change for complex Terraform / Ansible configuration management within the pipeline. This is discussed more in-depth in the [Typical Use Cases section]().
+There are several approaches to team-based Terraform deployments, each with its own individual merits. For example, SaaS services such as [scalr](https://scalr.com) and [Terraform Cloud](https://www.terraform.io/docs/cloud/index.html) exist to manage concurrent Terraform automation modules across teams. With a strong preference to open source and a being a huge fan of [Gitlab,](https://about.gitlab.com) ChatOps, and [xpn's previous work on Terraform / Ansible based security integration in Gitlab CI](https://blog.xpnsec.com/testing-redteam-infra/), I favored an approach which would allow for 'plug-n-play' deployments. In other words, tuning a Gitlab CI pipeline to serialize simple changes, which would be picked up as a state change for complex Terraform / Ansible configuration management within the pipeline. This is discussed more in-depth in the [Typical Use Cases section](broken-reference).
 
-For the last couple of years, infosec players such as [Rasta Mouse](https://twitter.com/_rastamouse), [spotless](https://twitter.com/spotheplanet) and [byt3bl33d3r](https://twitter.com/byt3bl33d3r) have all embraced Terraform as a go-to for rapid infrastructure construction as well, which is discussed in greater detail in the [Existing Offensive Toolkits section]().
+For the last couple of years, infosec players such as [Rasta Mouse](https://twitter.com/\_rastamouse), [spotless](https://twitter.com/spotheplanet) and [byt3bl33d3r](https://twitter.com/byt3bl33d3r) have all embraced Terraform as a go-to for rapid infrastructure construction as well, which is discussed in greater detail in the [Existing Offensive Toolkits section](broken-reference).
 
 ![Typical Terraform Workflow](../.gitbook/assets/operation2.jpg)
 
 ### Ansible
 
-Like most software ecosystems, DevOps tool chains have many strong opinions preceding them, and [Ansible ](https://www.ansible.com/)is no stranger to phrases such as "why not just use Docker Compose?!" Ansible's fundamental flaw is the playbooks which comprises its configuration-as-code operations can be broken easily by an upstream repository / dependency change, depending on where & how the configuration is being invoked. With Docker containers, you know exactly what to expect when you run the container, or so we are told \(this obviously changes as Docker compositions become more complex and contain more and more containers\). 
+Like most software ecosystems, DevOps tool chains have many strong opinions preceding them, and [Ansible ](https://www.ansible.com)is no stranger to phrases such as "why not just use Docker Compose?!" Ansible's fundamental flaw is the playbooks which comprises its configuration-as-code operations can be broken easily by an upstream repository / dependency change, depending on where & how the configuration is being invoked. With Docker containers, you know exactly what to expect when you run the container, or so we are told (this obviously changes as Docker compositions become more complex and contain more and more containers).&#x20;
 
-From an offensive security perspective, Ansible really shines in its idempotency and [inventory system](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html). This allows for intentional, concurrent [configuration drift](https://shadow-soft.com/ansible-idempotency-configuration-drift/) to occur on multiple machines at any given point in time. For example, if a systemd unit needed to be modified, Ansible would only modify the machines' states based on any \(if any\) changes in the playbook in relation to what is already present/missing on the target. Imagine a scenario in which a blue team discovers C2 infrastructure: you would want to stop all services until a certain point in the future, in order give your team some buffer time to switch to a backup domain for the remainder of the engagement, before quickly re-deploying. 
+From an offensive security perspective, Ansible really shines in its idempotency and [inventory system](https://docs.ansible.com/ansible/latest/user\_guide/intro\_inventory.html). This allows for intentional, concurrent [configuration drift](https://shadow-soft.com/ansible-idempotency-configuration-drift/) to occur on multiple machines at any given point in time. For example, if a systemd unit needed to be modified, Ansible would only modify the machines' states based on any (if any) changes in the playbook in relation to what is already present/missing on the target. Imagine a scenario in which a blue team discovers C2 infrastructure: you would want to stop all services until a certain point in the future, in order give your team some buffer time to switch to a backup domain for the remainder of the engagement, before quickly re-deploying.&#x20;
 
 The combination of the core Terraform workflow and Ansible's idempotent aware configuration-as-code model make for a flexible framework of maintaining multiple pieces of infrastructure at scale, with speed and simplicity baked in as the design philosophy of the frameworks themselves.
 
@@ -88,17 +88,17 @@ Due to the following design decisions, I spun a new project rather than forking 
 
 * Deployments would require modification of cut-and-dry configuration JSON templates only, for future micro-service / CI ingestion
 * All configuration would be done by Ansible, automatically.
-  * In-line scripts would remain an option \(recommended against\), but be removed.
+  * In-line scripts would remain an option (recommended against), but be removed.
 * Top-level modules would be created through stacked Terraform sub-modules, to make composition easier in the future
 * Publicly facing assets would only expose ports & services necessary for their core offensive function to the internet.
   * All administrative functions to be exposed to the internal operators' private network only.
   * Underlying infrastructure would be obscured to external parties.
 
-Since the original project was based on an infamous WW1 fighter pilot, I named the project after [Richard Ira Bong](https://en.wikipedia.org/wiki/Richard_Bong), an American WW2 Ace and Medal of Honor recipient.
+Since the original project was based on an infamous WW1 fighter pilot, I named the project after [Richard Ira Bong](https://en.wikipedia.org/wiki/Richard\_Bong), an American WW2 Ace and Medal of Honor recipient.
 
 ### Improvements Summary
 
-The following improvements \(in a nutshell\) were made to the original Red Baron code:
+The following improvements (in a nutshell) were made to the original Red Baron code:
 
 * Terraform upgrade to v0.14.4
   * Includes new Terraform syntax paradigms, such as :
@@ -107,7 +107,7 @@ The following improvements \(in a nutshell\) were made to the original Red Baron
   * local variables
   * Upgraded acme providers
 * Complete, hands-off Cobalt Strike and Gophish Ansible playbooks
-  * Using up-to-date software distros: Ansible v2.10.4 \(via python3\), Cobalt Strike 4.2, and Gophish 0.11.0
+  * Using up-to-date software distros: Ansible v2.10.4 (via python3), Cobalt Strike 4.2, and Gophish 0.11.0
   * Added J2 templates & C2 profiles that can be fed into the playbooks.
 * Cleaned up code
   * Removed count where unnecessary
@@ -115,7 +115,7 @@ The following improvements \(in a nutshell\) were made to the original Red Baron
   * Simplified modules
   * Added explicit type constraints where possible
 * Boilerplate base variable files for unmanaged infrastructure declaration
-* Deployment specific module abstractions \(infra as well as Ansible modules\)
+* Deployment specific module abstractions (infra as well as Ansible modules)
   * Cobalt strike, Gophish
 
 ## Red Ira Software Implementation
@@ -126,15 +126,15 @@ Currently, Red Ira is implemented only for AWS.
 
 ### Network Isolation
 
-As [outlined in the Red Team Infrastructure Wiki](https://github.com/bluscreenofjeff/Red-Team-Infrastructure-Wiki#securing-infrastructure), securing Red Team Infrastructure encompasses standard defense-in-depth measures such as limiting service exposure, employing access control policies, and keep machines up to date. Red-Baron was a bit lenient with the standard[ inbound port exposure,](https://github.com/Coalfire-Research/Red-Baron/blob/master/modules/aws/dns-c2/security_group.tf) so a least-privilege model was implemented to isolate all back-end infrastructure, with the redirectors being solely exposed to the internet with their respective functional service port\(s\). 
+As [outlined in the Red Team Infrastructure Wiki](https://github.com/bluscreenofjeff/Red-Team-Infrastructure-Wiki#securing-infrastructure), securing Red Team Infrastructure encompasses standard defense-in-depth measures such as limiting service exposure, employing access control policies, and keep machines up to date. Red-Baron was a bit lenient with the standard[ inbound port exposure,](https://github.com/Coalfire-Research/Red-Baron/blob/master/modules/aws/dns-c2/security\_group.tf) so a least-privilege model was implemented to isolate all back-end infrastructure, with the redirectors being solely exposed to the internet with their respective functional service port(s).&#x20;
 
-This model requires that the creation of a VPC, private subnet, public subnet, and any custom security groups applying to those subnets within the [environment\_variables.auto.tfvars.json](https://github.com/joeminicucci/RedIra/blob/master/environment_variables.auto.tfvars.json.template) file. The automation of VPC & subnet creation was not needed by my team in phase 1, but is consideration for the [next release](redira.md#future). This is outlined in the [README](https://github.com/joeminicucci/RedIra/blob/master/README.md). The [base\_variables.tf](https://github.com/joeminicucci/RedIra/blob/master/base_variables.tf) file works in conjunction with the [environment_\__variables file](https://github.com/joeminicucci/RedIra/blob/master/environment_variables.auto.tfvars.json.template) by carrying unmanaged variables, such as AMI IDs, across deployments without the need to re-define them per module. [base\_variables.tf](https://github.com/joeminicucci/RedIra/blob/master/base_variables.tf) files are then placed in each module's folder to represent those unmanaged variable provisions at runtime when Terraform builds its DAG for that module.
+This model requires that the creation of a VPC, private subnet, public subnet, and any custom security groups applying to those subnets within the [environment\_variables.auto.tfvars.json](https://github.com/joeminicucci/RedIra/blob/master/environment\_variables.auto.tfvars.json.template) file. The automation of VPC & subnet creation was not needed by my team in phase 1, but is consideration for the [next release](redira.md#future). This is outlined in the [README](https://github.com/joeminicucci/RedIra/blob/master/README.md). The [base\_variables.tf](https://github.com/joeminicucci/RedIra/blob/master/base\_variables.tf) file works in conjunction with the [environment_\__variables file](https://github.com/joeminicucci/RedIra/blob/master/environment\_variables.auto.tfvars.json.template) by carrying unmanaged variables, such as AMI IDs, across deployments without the need to re-define them per module. [base\_variables.tf](https://github.com/joeminicucci/RedIra/blob/master/base\_variables.tf) files are then placed in each module's folder to represent those unmanaged variable provisions at runtime when Terraform builds its DAG for that module.
 
 ### Cut and Dry Variable Inputs
 
-In its current state, Red Ira can be fed the required variables for any given deployment using a [deployment's corresponding JSON file](https://github.com/joeminicucci/RedIra/tree/master/deployments/aws), or [as variables through the command line](https://www.terraform.io/docs/language/values/variables.html#variables-on-the-command-line). For example, the [complete AWS deployment template is implemented in JSON](https://github.com/joeminicucci/RedIra/blob/master/deployments/aws/complete/aws_complete.auto.tfvars.json.template) as follows, allowing for any number of Cobalt Strike C2 and Gophish phishing deployments to be spawned concurrently:
+In its current state, Red Ira can be fed the required variables for any given deployment using a [deployment's corresponding JSON file](https://github.com/joeminicucci/RedIra/tree/master/deployments/aws), or [as variables through the command line](https://www.terraform.io/docs/language/values/variables.html#variables-on-the-command-line). For example, the [complete AWS deployment template is implemented in JSON](https://github.com/joeminicucci/RedIra/blob/master/deployments/aws/complete/aws\_complete.auto.tfvars.json.template) as follows, allowing for any number of Cobalt Strike C2 and Gophish phishing deployments to be spawned concurrently:
 
-```text
+```
 {
   "http-c2-amount": 1,
   "http-c2-user": "admin",
@@ -163,7 +163,7 @@ In its current state, Red Ira can be fed the required variables for any given de
 
 ### Module Abstractions
 
-Since Terraform was designed from the ground-up with modularity in mind, my opinion is that best practice should include repeatable modules which adhere to a single responsibility and can easily be copied around as boilerplate code.  
+Since Terraform was designed from the ground-up with modularity in mind, my opinion is that best practice should include repeatable modules which adhere to a single responsibility and can easily be copied around as boilerplate code. &#x20;
 
 #### Ansible Abstractions
 
@@ -194,7 +194,7 @@ command = "ansible-playbook ${join(" ", compact(var.arguments))} --user=${var.us
 
 #### Cobalt Strike & Gophish Ansible Modules
 
-Using the [base Ansible module](https://github.com/joeminicucci/RedIra/tree/master/modules/ansible/core), abstracting the [Cobalt Stri](https://github.com/joeminicucci/ansible-role-cobalt-strike/)[ke role I created \(with the help of chryzsh\)](https://github.com/joeminicucci/ansible-role-cobalt-strike/) into a Terraform module was relatively straightforward. First the variables which are needed by Ansible are tracked within a Terraform [variables.tf file](https://github.com/joeminicucci/RedIra/blob/master/modules/ansible/cobalt-strike/variables.tf), as follows:
+Using the [base Ansible module](https://github.com/joeminicucci/RedIra/tree/master/modules/ansible/core), abstracting the [Cobalt Stri](https://github.com/joeminicucci/ansible-role-cobalt-strike/)[ke role I created (with the help of chryzsh)](https://github.com/joeminicucci/ansible-role-cobalt-strike/) into a Terraform module was relatively straightforward. First the variables which are needed by Ansible are tracked within a Terraform [variables.tf file](https://github.com/joeminicucci/RedIra/blob/master/modules/ansible/cobalt-strike/variables.tf), as follows:
 
 ```csharp
 locals {
@@ -270,7 +270,7 @@ module "cs-ansible"{
 }
 ```
 
-The [core\_config.yml playbook](https://github.com/joeminicucci/RedIra/blob/master/data/playbooks/core_config.yml) contains the following core dependency installs through apt, and is a replacement for the [original inline script invocations that Red Baron utilized](https://github.com/Coalfire-Research/Red-Baron/blob/master/data/scripts/core_deps.sh):
+The [core\_config.yml playbook](https://github.com/joeminicucci/RedIra/blob/master/data/playbooks/core\_config.yml) contains the following core dependency installs through apt, and is a replacement for the [original inline script invocations that Red Baron utilized](https://github.com/Coalfire-Research/Red-Baron/blob/master/data/scripts/core\_deps.sh):
 
 ```csharp
 - name: Core Configuration
@@ -390,7 +390,7 @@ module "http-c2-ansible"{
 
 #### Top Level Deployment Modules
 
-Putting it all together, the [modules can be placed in a deployment](https://github.com/joeminicucci/RedIra/blob/master/deployments/aws/c2_http/aws_c2_http.tf), with the above example being declared as simply as:
+Putting it all together, the [modules can be placed in a deployment](https://github.com/joeminicucci/RedIra/blob/master/deployments/aws/c2\_http/aws\_c2\_http.tf), with the above example being declared as simply as:
 
 ```csharp
 module "cs-http-c2" {
@@ -422,7 +422,7 @@ The following approach is essentially taking [Gitlab CI](https://docs.gitlab.com
 
 1. An operator would use a custom slash command in Slack, with the 'cut-and-dry' variables - i.e. the pared down variable requirements for each individual Red Ira deployment, as arguments. [Gitlab ChatOps](https://docs.gitlab.com/ee/ci/chatops/index.html) is perfect for this. Each particular customer environment would map to a Terraform workspace and the ChatOps command could be invoked as follows from Slack:
 
-```text
+```
 /red-ira run http-c2 [Customer_Name] [domain]
 ```
 
@@ -430,9 +430,9 @@ The following approach is essentially taking [Gitlab CI](https://docs.gitlab.com
 
 The above command, on the back-end, would need to perform some workspace management. This is due to the way[ Terraform manages variables on disk directly when working with the open source CLI.](https://www.terraform.io/docs/cloud/workspaces/index.html#workspace-contents)
 
-The following would need to be implemented, assuming the complete deployment would always reside in the root directory, as a [Ruby ChatOps command](https://gitlab.com/gitlab-com/chatops#adding-commands): 
+The following would need to be implemented, assuming the complete deployment would always reside in the root directory, as a [Ruby ChatOps command](https://gitlab.com/gitlab-com/chatops#adding-commands):&#x20;
 
-1. Terraform `workspace` command for customer name \(creates if doesn't exist\)
+1. Terraform `workspace` command for customer name (creates if doesn't exist)
 2. The corresponding variables file, in this case aws\_complete.auto.tfvars.json,  would need to be renamed in a convention that could identify the customer,  for example, `aws_complete.Customer_Name.auto.tfvars.json`. This step can be avoided if the CI runners are made separately for each customer.
    1. If a pre-existing customer workspace is already deployed in the folder, the Ruby appends `.old` to the file extension, to ensure that Terraform doesn't pick it up. Concurrency is assured since the commands run on the same CI runner.
    2. If the same customer's variables file already exists, it is renamed back from `.old` back to `.json` and the JSON is appended to as directed from the slash command.
@@ -469,6 +469,4 @@ There are a number of improvements that are planned for Red Ira in the future, i
 {% embed url="https://github.com/bluscreenofjeff/Red-Team-Infrastructure-Wiki" %}
 
 {% embed url="https://www.youtube.com/watch?v=XaICChBJMck" %}
-
-
 

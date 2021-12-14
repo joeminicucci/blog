@@ -157,7 +157,7 @@ void meshInitialization(){
 }
 ```
 
-** **The `onNodeTimeAdjusted` callback function is crucial to guaranteeing the time SNTP time synchronization within the mesh, and if the node drops or falls out of sync it will reconnect an re-sync as follows:
+&#x20;**** The `onNodeTimeAdjusted` callback function is crucial to guaranteeing the time SNTP time synchronization within the mesh, and if the node drops or falls out of sync it will reconnect an re-sync as follows:
 
 ```cpp
 void onTimeAdjusted(int32_t offset){
@@ -185,9 +185,9 @@ The `CalculateSyncAndLaunchTasks()` function gives an introspection into how the
 The task model functioned as follows:
 
 * **botInitialization** : Places the bot into mesh communication mode to talk to the network. All bots must be in communication at the same time.
-* **channelHop **: Changes the wireless channels at specified time intervals while sniffing.
-* **resync **: Sets flag to resynchronize node to the mesh at a guaranteed period.
-* **snifferInitialization **: Places the node into 'sniffing' promiscuous mode and scans the air for a BSSID (MAC) contained in the targets list which is either probing or beaconing.
+* **channelHop** : Changes the wireless channels at specified time intervals while sniffing.
+* **resync** : Sets flag to resynchronize node to the mesh at a guaranteed period.
+* **snifferInitialization** : Places the node into 'sniffing' promiscuous mode and scans the air for a BSSID (MAC) contained in the targets list which is either probing or beaconing.
 * **sendAlert** : Drops out of sniffing mode when a target is found and continuously reports to the mesh for specified periods
 
 And would be declared in the C++ as follows, as tasks with callback function pointers:
@@ -222,7 +222,7 @@ If a bot discovers a target, [discussed further in the alerting section](wireles
 
 Should SNTP be found to change, the current time is pulled from the mesh, and the closest interval threshold offset to synchronize with the network is calculated as follows:
 
-1. Take the sum of the two main mode intervals. **Assume they both add up to a prime and/or odd number. ** This is the total time it will take to re-start to mesh mode, or `precision`
+1. Take the sum of the two main mode intervals. **Assume they both add up to a prime and/or odd number.** This is the total time it will take to re-start to mesh mode, or `precision`
 2. Round up the current NTP time to the calculated precision to find the next point in time to sync with. This is the `nextThreshold`
 3. Subtract the current NTP time from the `nextThreshold` to determine how long the node must delay to re-enter the network&#x20;
 

@@ -15,8 +15,6 @@ I am an Offensive Security Engineer specializing in Penetration Testing and Red 
 
 ### [GitHub](https://github.com/joeminicucci)
 
-### [LinkedIn](https://www.linkedin.com/in/joeminicucci)
-
 ### [Twitter](https://twitter.com/joeminicucci)
 
 

@@ -157,7 +157,7 @@ void meshInitialization(){
 }
 ```
 
-&#x20;**** The `onNodeTimeAdjusted` callback function is crucial to guaranteeing the time SNTP time synchronization within the mesh, and if the node drops or falls out of sync it will reconnect an re-sync as follows:
+&#x20;The `onNodeTimeAdjusted` callback function is crucial to guaranteeing the time SNTP time synchronization within the mesh, and if the node drops or falls out of sync it will reconnect an re-sync as follows:
 
 ```cpp
 void onTimeAdjusted(int32_t offset){
@@ -555,7 +555,7 @@ While the ESP8266 is a fantastic chip to get going fast and easy on 802.11 stack
 
 Using an SDR over a custom frequency, or a [LoRa hardware](https://en.wikipedia.org/wiki/LoRa) would most likely provide a more stable communications channel and would allow for signal interrupts, nullifying the need to implement the bi-modal model in bots. BLE could also make for an interesting option.
 
-After our [DEFCON 26 presentation on hunting rogue access points](https://www.youtube.com/watch?v=jGYrE3Jw-e0), we shared the mesh C2 idea around the wireless village, and showed a couple of teams our prototypes. To a bit of surprise, the [Dark Wolf Solutions](https://darkwolfsolutions.com) team had taken our idea and run with it. Right after this presentation was given at DEFCON 27, the DarkWolf team 3d printed a box that contained a LoRa chip, multiple SMA antenna mounts, and even a GUI that they controlled their mesh from on their laptops. I wasn't given the opportunity to look at their source code beyond a peak, however it goes to show that a little extra budget and man power can truly go a long way. I wish sincerely the team will one day open source the project and give back to the community. They bought me a beer and let me take a picture, luckily, and here's what it looked like:
+After our [DEFCON 26 presentation on hunting rogue access points](https://www.youtube.com/watch?v=jGYrE3Jw-e0), we shared the mesh C2 idea around the wireless village, and showed a couple of teams our prototypes. To a bit of surprise, the [Dark Wolf Solutions](https://darkwolfsolutions.com/) team had taken our idea and run with it. Right after this presentation was given at DEFCON 27, the DarkWolf team 3d printed a box that contained a LoRa chip, multiple SMA antenna mounts, and even a GUI that they controlled their mesh from on their laptops. I wasn't given the opportunity to look at their source code beyond a peak, however it goes to show that a little extra budget and man power can truly go a long way. I wish sincerely the team will one day open source the project and give back to the community. They bought me a beer and let me take a picture, luckily, and here's what it looked like:
 
 ![DWS' LoRa mesh solution](../.gitbook/assets/IMG\_0632.jpg)
 
@@ -577,5 +577,5 @@ The original source code is open and free, and can be found here:
 
 Credit goes to:
 
-* ****[**Joe Minicucci**](https://joeminicucci.com) - _Software implementation and architecture_
+* [**Joe Minicucci**](https://joeminicucci.com) - _Software implementation and architecture_
 * **Todd Cronin** - _Hardware and conceptual design_

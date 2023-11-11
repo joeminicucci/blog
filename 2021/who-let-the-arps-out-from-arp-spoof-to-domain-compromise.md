@@ -28,7 +28,7 @@ Ruling out the existence of AD in an environment can be as simple as scanning fo
 
 Continuing the Layer 2 attacks in the hopes of catching a low-hanging fruit, it was time to get a taste of the old-school with some [ARP spoofing](https://attack.mitre.org/techniques/T1557/002/).
 
-[BetterCap ](https://www.bettercap.org)is a superb tool network attack tool written by [@evilsocket](https://twitter.com/evilsocket). Due to its maturity, it has become my go-to for Layer 2 attacks & ARP spoofing, rather than [Ettercap](https://www.ettercap-project.org) (a great project also). To perform the ARP spoof:
+[BetterCap ](https://www.bettercap.org/)is a superb tool network attack tool written by [@evilsocket](https://twitter.com/evilsocket). Due to its maturity, it has become my go-to for Layer 2 attacks & ARP spoofing, rather than [Ettercap](https://www.ettercap-project.org/) (a great project also). To perform the ARP spoof:
 
 1. Gather a list of target IPs with services known to pass credentials, e.g. `http` &#x20;
 2. Set those targets in the [arp.spoof module of BetterCap](https://www.bettercap.org/modules/ethernet/spoofers/arp.spoof/)
@@ -39,7 +39,7 @@ Continuing the Layer 2 attacks in the hopes of catching a low-hanging fruit, it 
 
 ### HTTP Foothold
 
-The results came in quick, with what appeared to be a live session over a non-secure HTTP negotiation to a [Zabbix](https://www.zabbix.com) server:
+The results came in quick, with what appeared to be a live session over a non-secure HTTP negotiation to a [Zabbix](https://www.zabbix.com/) server:
 
 ![Catching an HTTP session with BetterCap](../.gitbook/assets/arpsniff.png)
 
@@ -49,7 +49,7 @@ Placing the cookie into a browser indeed verified session access, along with a v
 
 ![Zabbix version disclosure in HTML source](../.gitbook/assets/zabbixversion.png)
 
-With a simple search of [exploitdb](https://www.exploit-db.com), the [ZabbixPwn script ](https://github.com/RicterZ/zabbixPwn/blob/master/zabbixPwn.py)was used to leverage a SQL injection vulnerability in the PHP JSON RPC service. I modified the exploit to ignore username/session discovery since the call was returning errors on the particular Zabbix 3.0 deployment, and hard-coded the sessionId.
+With a simple search of [exploitdb](https://www.exploit-db.com/), the [ZabbixPwn script ](https://github.com/RicterZ/zabbixPwn/blob/master/zabbixPwn.py)was used to leverage a SQL injection vulnerability in the PHP JSON RPC service. I modified the exploit to ignore username/session discovery since the call was returning errors on the particular Zabbix 3.0 deployment, and hard-coded the sessionId.
 
 The hosts returned contained a Zabbix server ID which is used by ZabbixPwn to gain a webshell:
 
